@@ -41,11 +41,21 @@ public class QueryUtils {
                 JSONObject currentCodeforces = codeforcesArray.getJSONObject(i);
 
 
-                JSONObject nul = currentCodeforces.getJSONObject("");
 
-                String name = nul.getString("name");
-                Integer duration = nul.getInt("durationSeconds");
-                Integer startTimeSecond = nul.getInt("startTimeSeconds");
+
+                String name = currentCodeforces.getString("name");
+                Integer duration = currentCodeforces.getInt("durationSeconds");
+                Integer startTimeSecond;
+                if(currentCodeforces.isNull("startTimeSeconds")) {
+                startTimeSecond= 0;
+
+                }
+                else{
+                    startTimeSecond = currentCodeforces.getInt("startTimeSeconds");
+
+
+
+                }
 
                 Codeforces codeforces = new Codeforces(name, duration, startTimeSecond);
                 codeforcess.add(codeforces);
@@ -135,9 +145,10 @@ public class QueryUtils {
         }
 
 
+
         List<Codeforces> codeforcess = extractFeatureFromJson(jsonResponse);
 
-
+        Log.i( "main thing ",codeforcess.toString());
         return codeforcess;
     }
 

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             if (urls.length < 1 || urls[0] == null) {
                 return null;
             }
-            result = QueryUtils.fetchCodeforcesData(CODEFORCES_URL);
+            result = QueryUtils.fetchEarthquakeData(CODEFORCES_URL);
 
             Log.i("array list ",result.toString());
             return result;

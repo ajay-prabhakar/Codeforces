@@ -7,13 +7,13 @@ private Integer mDuration;
 private Integer mStartTime;
 private Enum mPhase;
 
-public Codeforces(String name ,Integer duration ,Integer startTime ,Enum phase){
+public Codeforces(String name ,Integer duration ,Integer startTime ){
 
 
     mName = name;
     mDuration=duration;
     mStartTime=startTime;
-    mPhase=phase;
+
 
 }
 
