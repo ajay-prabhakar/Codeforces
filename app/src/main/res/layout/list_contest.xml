@@ -16,28 +16,39 @@
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:text="Name"
+        tools:text="Context Name"
         tools:ignore="MissingPrefix"
         android:padding="8dp"/>
 
     <TextView
-        android:id="@+id/tvDuration"
+        android:id="@+id/tvRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
         android:textSize="14sp"
-        tools:text="Duration"
+        tools:text="Rank"
         android:padding="5dp"/>
     <TextView
-        android:id="@+id/tvStart"
+        android:id="@+id/tvnewRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
         android:textSize="14sp"
-        tools:text="Start"
+        tools:text="New Rating"
         android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/tvChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:textSize="14sp"
+        tools:text="Change"
+        android:padding="5dp"/>
+
 
 
 
