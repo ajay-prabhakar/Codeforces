@@ -19,10 +19,17 @@ public class Loader extends AsyncTaskLoader<String> {
 
     }
 
-    static URL CodeforcesURL(String Url){
+
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        forceLoad();
+    }
+
+    private static URL CodeforcesURL(String stringUrl){
         URL url = null;
         try {
-            url = new URL(Url);
+            url = new URL(stringUrl);
         } catch (MalformedURLException e) {
         }
         return url;

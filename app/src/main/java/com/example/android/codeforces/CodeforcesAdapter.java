@@ -40,19 +40,22 @@ public class CodeforcesAdapter extends RecyclerView.Adapter<CodeforcesAdapter.Co
         final Codeforces codeforces= CodeforcesList.get(position);
         holder.contestName.setText(String.valueOf(codeforces.getContestName()));
         holder.rank.setText(String.valueOf(codeforces.getRank()));
+        holder.oldRating.setText(String.valueOf(codeforces.getOldRating()));
         holder.change.setText(String.valueOf(codeforces.getChange()));
         holder.newRating.setText(String.valueOf(codeforces.getNewRating()));
+
     }
 
     public class CodeforcesViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView contestName, rank, change, newRating;
+        private final TextView contestName, rank, oldRating, change, newRating;
+
 
         private CodeforcesViewHolder(View itemView) {
             super(itemView);
             contestName = itemView.findViewById(R.id.tvName);
             rank = itemView.findViewById(R.id.tvRank);
-
+            oldRating = itemView.findViewById(R.id.oldRating);
             change = itemView.findViewById(R.id.tvChange);
             newRating = itemView.findViewById(R.id.tvnewRating);
         }

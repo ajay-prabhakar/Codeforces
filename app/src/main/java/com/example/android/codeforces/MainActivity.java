@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static final String CODEFORCES_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
 
-    private CodeforcesAdapter mAdapter;
-    List<Codeforces> result;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,37 +36,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-
-    static ArrayList<Codeforces> reverse(ArrayList<Codeforces> CodeforcesList){
-        ArrayList<Codeforces> newList = new ArrayList<>();
-        for(int i=CodeforcesList.size()-1; i>=0; i--)
-            newList.add(CodeforcesList.get(i));
-        return newList;
-    }
-
-
     @Override
-    public Loader<String> onCreateLoader(int i, Bundle bundle) {
+    public Loader<String> onCreateLoader(int id, Bundle args) {
         return new Loader(this);
-
-
     }
 
+
     @Override
-    public void onLoadFinished(Loader<String> loader, String s) {
+    public void onLoadFinished(Loader<String> loader, String data) {
 
         ArrayList<Codeforces> CodeforcesList = new ArrayList<Codeforces>();
         try {
-            JSONObject basejsonResponse = new JSONObject(s);
+            JSONObject basejsonResponse = new JSONObject(data);
             JSONArray res = basejsonResponse.getJSONArray("result");
             for(int i=0; i<res.length(); i++){
-                Codeforces contest = new Codeforces();
-                contest.setContestName(res.getJSONObject(i).getString("contestName"));
-                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
-                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
-                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
-                contest.setChange(contest.getNewRating()-contest.getOldRating());
-                CodeforcesList.add(contest);
+                Codeforces Codeforces = new Codeforces();
+                Codeforces.setContestName(res.getJSONObject(i).getString("contestName"));
+                Codeforces.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
+                Codeforces.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
+                Codeforces.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
+                Codeforces.setChange(Codeforces.getNewRating()-Codeforces.getOldRating());
+                CodeforcesList.add(Codeforces);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -83,34 +70,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-//    @Override
-//    public void onLoadFinished(Loader<Object> loader,String data) {
-//        ArrayList<Codeforces> CodeforcesList = new ArrayList<Codeforces>();
-//        try {
-//            JSONObject basejsonResponse = new JSONObject(data);
-//            JSONArray res = basejsonResponse.getJSONArray("result");
-//            for(int i=0; i<res.length(); i++){
-//                Codeforces contest = new Codeforces();
-//                contest.setContestName(res.getJSONObject(i).getString("contestName"));
-//                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
-//                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
-//                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
-//                contest.setChange(contest.getNewRating()-contest.getOldRating());
-//                CodeforcesList.add(contest);
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        CodeforcesList = reverse(CodeforcesList);
-//        RecyclerView recyclerView = findViewById(R.id.contestsAppeared);
-//        CodeforcesAdapter adapter = new CodeforcesAdapter(this, CodeforcesList);
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//    }
-
     @Override
     public void onLoaderReset(Loader<String> loader) {
 
+    }
+
+
+    static ArrayList<Codeforces> reverse(ArrayList<Codeforces> CodeforcesList){
+        ArrayList<Codeforces> newList = new ArrayList<>();
+        for(int i=CodeforcesList.size()-1; i>=0; i--)
+            newList.add(CodeforcesList.get(i));
+
+        Log.i( "reverse:hello ",newList.toString());
+        return newList;
     }
 }
