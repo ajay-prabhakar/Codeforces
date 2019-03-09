@@ -1,53 +1,66 @@
 package com.example.android.codeforces;
 
-import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CodeforcesAdapter extends ArrayAdapter<Codeforces> {
 
-    public CodeforcesAdapter(Activity context, List<Codeforces> codeforces) {
-        super(context, 0, codeforces);
+public class CodeforcesAdapter extends RecyclerView.Adapter<CodeforcesAdapter.CodeforcesViewHolder> {
+
+    private ArrayList<Codeforces> CodeforcesList;
+    private Context context;
+
+
+    CodeforcesAdapter(Context context, ArrayList<Codeforces> CodeforcesList){
+
+        this.CodeforcesList =CodeforcesList;
+        this.context= context;
+
+    }
+
+    @Nullable
+    @Override
+    public CodeforcesAdapter.CodeforcesViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewType){
+        View v =LayoutInflater.from(context).inflate(R.layout.list_contest,parent,false);
+        return new CodeforcesAdapter.CodeforcesViewHolder(v);
+
+
     }
 
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public void onBindViewHolder(@NonNull CodeforcesAdapter.CodeforcesViewHolder holder, int position) {
+        final Codeforces codeforces= CodeforcesList.get(position);
+        holder.contestName.setText(String.valueOf(codeforces.getContestName()));
+        holder.rank.setText(String.valueOf(codeforces.getRank()));
+        holder.change.setText(String.valueOf(codeforces.getChange()));
+        holder.newRating.setText(String.valueOf(codeforces.getNewRating()));
+    }
 
+    public class CodeforcesViewHolder extends RecyclerView.ViewHolder {
 
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_contest, parent, false);
+        private final TextView contestName, rank, change, newRating;
+
+        private CodeforcesViewHolder(View itemView) {
+            super(itemView);
+            contestName = itemView.findViewById(R.id.tvName);
+            rank = itemView.findViewById(R.id.tvRank);
+
+            change = itemView.findViewById(R.id.tvChange);
+            newRating = itemView.findViewById(R.id.tvnewRating);
         }
+    }
 
-
-        Codeforces currentCodeforces = getItem(position);
-
-
-
-        TextView nameView = (TextView)listItemView.findViewById(R.id.tvName);
-        nameView.setText(currentCodeforces.getmName());
-
-
-
-        TextView durationView = (TextView)listItemView.findViewById(R.id.tvDuration);
-        durationView.setText(currentCodeforces.getmDuration());
-
-
-
-        TextView startTime = (TextView)listItemView.findViewById(R.id.tvStart);
-        startTime.setText(currentCodeforces.getmStartTime());
-
-
-        return listItemView;
-
+    @Override
+    public int getItemCount() {
+        return CodeforcesList.size();
     }
 
 
