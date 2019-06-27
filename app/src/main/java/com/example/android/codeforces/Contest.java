@@ -1,6 +1,5 @@
 package com.example.android.codeforces;
-
-public class Codeforces {
+public class Contest {
     private String contestName;
     private int rank;
     private int oldRating;

@@ -3,85 +3,70 @@ package com.example.android.codeforces;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
-    public static final String CODEFORCES_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
-
+    private static final String API_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Uri uri = Uri.parse(API_URL);
 
-        Uri uri=Uri.parse(CODEFORCES_URL);
-        getLoaderManager().initLoader(0,null,  this);
-
-
+        getLoaderManager().initLoader(0, null, this);
     }
-
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
-        return new Loader(this);
+        return new RatingLoader(this);
     }
-
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
-
-        ArrayList<Codeforces> CodeforcesList = new ArrayList<Codeforces>();
+        ArrayList<Contest> contestList = new ArrayList<Contest>();
         try {
             JSONObject basejsonResponse = new JSONObject(data);
             JSONArray res = basejsonResponse.getJSONArray("result");
             for(int i=0; i<res.length(); i++){
-                Codeforces Codeforces = new Codeforces();
-                Codeforces.setContestName(res.getJSONObject(i).getString("contestName"));
-                Codeforces.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
-                Codeforces.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
-                Codeforces.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
-                Codeforces.setChange(Codeforces.getNewRating()-Codeforces.getOldRating());
-                CodeforcesList.add(Codeforces);
+                Contest contest = new Contest();
+                contest.setContestName(res.getJSONObject(i).getString("contestName"));
+                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
+                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
+                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
+                contest.setChange(contest.getNewRating()-contest.getOldRating());
+                contestList.add(contest);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        CodeforcesList = reverse(CodeforcesList);
+        contestList = reverse(contestList);
         RecyclerView recyclerView = findViewById(R.id.contestsAppeared);
-        CodeforcesAdapter adapter = new CodeforcesAdapter(this, CodeforcesList);
+        ContestsAppearedAdapter adapter = new ContestsAppearedAdapter(this, contestList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
-
 
     @Override
     public void onLoaderReset(Loader<String> loader) {
 
     }
 
-
-    static ArrayList<Codeforces> reverse(ArrayList<Codeforces> CodeforcesList){
-        ArrayList<Codeforces> newList = new ArrayList<>();
-        for(int i=CodeforcesList.size()-1; i>=0; i--)
-            newList.add(CodeforcesList.get(i));
-
-        Log.i( "reverse:hello ",newList.toString());
+    static ArrayList<Contest> reverse(ArrayList<Contest> contestList){
+        ArrayList<Contest> newList = new ArrayList<>();
+        for(int i=contestList.size()-1; i>=0; i--)
+            newList.add(contestList.get(i));
         return newList;
     }
 }

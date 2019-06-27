@@ -1,9 +1,12 @@
 package com.example.android.codeforces;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,75 +16,73 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
-
-
-public class Async extends AsyncTask<String,Void,ArrayList<Codeforces>> {
+public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> {
 
     private Activity activity;
 
-    public Async(Activity activity) {
+    public RatingAsync(Activity activity) {
         this.activity = activity;
     }
 
     @Override
-    protected ArrayList<Codeforces> doInBackground(String... strings) {
-        String CODEFORCE_API=strings[0],jsonResponse =null;
+    protected ArrayList<Contest> doInBackground(String... strings) {
+        String api = strings[0], jsonResponse = null;
+        URL url = createUrl(api);
 
-        URL url=CodeforcesURL(CODEFORCE_API);
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return extract(jsonResponse);
 
     }
 
-    private static ArrayList<Codeforces> extract(String jsonResponse){
-        ArrayList<Codeforces> CodeforcesList = new ArrayList<Codeforces>();
+    private static ArrayList<Contest> extract(String jsonResponse){
+        ArrayList<Contest> contestList = new ArrayList<Contest>();
         try {
             JSONObject basejsonResponse = new JSONObject(jsonResponse);
-
             JSONArray res = basejsonResponse.getJSONArray("result");
             for(int i=0; i<res.length(); i++){
-                Codeforces codeforces = new Codeforces();
-                codeforces.setContestName(res.getJSONObject(i).getString("contestName"));
-                codeforces.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
-                codeforces.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
-                codeforces.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
-                codeforces.setChange(codeforces.getNewRating()-codeforces.getOldRating());
-                CodeforcesList.add(codeforces);
+                Contest contest = new Contest();
+                contest.setContestName(res.getJSONObject(i).getString("contestName"));
+                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
+                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
+                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
+                contest.setChange(contest.getNewRating()-contest.getOldRating());
+                contestList.add(contest);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        CodeforcesList=reverse(CodeforcesList);
-        return CodeforcesList;
+        contestList = reverse(contestList);
+        return contestList;
     }
 
-
-    static ArrayList<Codeforces> reverse(ArrayList<Codeforces> CodeforcesList){
-        ArrayList<Codeforces> newList = new ArrayList<>();
-        for(int i=CodeforcesList.size()-1; i>=0; i--)
-            newList.add(CodeforcesList.get(i));
+    static ArrayList<Contest> reverse(ArrayList<Contest> contestList){
+        ArrayList<Contest> newList = new ArrayList<>();
+        for(int i=contestList.size()-1; i>=0; i--)
+            newList.add(contestList.get(i));
         return newList;
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Codeforces> codeforces) {
+    protected void onPostExecute(ArrayList<Contest> contests) {
         RecyclerView recyclerView = activity.findViewById(R.id.contestsAppeared);
-        CodeforcesAdapter adapter = new CodeforcesAdapter(activity, codeforces);
+        ContestsAppearedAdapter adapter = new ContestsAppearedAdapter(activity, contests);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
     }
 
-    private static URL CodeforcesURL(String stringUrl) {
+    private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
             url = new URL(stringUrl);
@@ -135,6 +136,4 @@ public class Async extends AsyncTask<String,Void,ArrayList<Codeforces>> {
         }
         return output.toString();
     }
-
-
 }

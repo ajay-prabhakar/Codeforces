@@ -2,6 +2,7 @@ package com.example.android.codeforces;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.widget.RatingBar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,14 +12,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Loader extends AsyncTaskLoader<String> {
-    private static final String CODEFORCES_URL="https://codeforces.com/api/user.rating?handle=sandeshghanta";
+public class RatingLoader extends AsyncTaskLoader<String> {
 
-    Loader(Context context){
+    private static final String API_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
+
+    RatingLoader(Context context){
         super(context);
-
     }
-
 
     @Override
     protected void onStartLoading() {
@@ -26,17 +26,28 @@ public class Loader extends AsyncTaskLoader<String> {
         forceLoad();
     }
 
-    private static URL CodeforcesURL(String stringUrl){
+    @Override
+    public String loadInBackground() {
+        URL url = createUrl(API_URL);
+        String json = null;
+        try {
+            json = makeHttpRequest(url);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
         }
         return url;
-
     }
 
-    static String makeHttpRequest(URL url) throws IOException {
+    private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
         if (url == null)
@@ -67,23 +78,6 @@ public class Loader extends AsyncTaskLoader<String> {
 
         return jsonResponse;
     }
-
-    @Override
-    public String loadInBackground() {
-
-        URL url = CodeforcesURL(CODEFORCES_URL);
-        String json = null;
-        try {
-            json = makeHttpRequest(url);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return json;
-
-
-
-    }
-
     private static String readFromStream(InputStream inputStream) throws IOException {
 
         StringBuilder output = new StringBuilder();
@@ -98,6 +92,4 @@ public class Loader extends AsyncTaskLoader<String> {
         }
         return output.toString();
     }
-
-
 }
