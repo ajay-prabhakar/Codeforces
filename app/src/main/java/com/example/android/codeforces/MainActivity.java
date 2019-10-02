@@ -2,7 +2,6 @@ package com.example.android.codeforces;
 
 import android.app.LoaderManager;
 import android.content.Loader;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,14 +15,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
-    private static final String API_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Uri uri = Uri.parse(API_URL);
 
         getLoaderManager().initLoader(0, null, this);
     }
