@@ -14,4 +14,17 @@
         android:scrollbars="vertical"
         android:layout_margin="15dp"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_arrow_upward_24dp"
+        app:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp" />
+
 </RelativeLayout>
