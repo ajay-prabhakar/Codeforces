@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                         v.setError(getString(R.string.empty_field));
                     } else {
                         Intent myIntent = new Intent(MainActivity.this, HomeFeedActivity.class);
-                        myIntent.putExtra(preferredHandleKey, v.getText());
+                        myIntent.putExtra(preferredHandleKey, v.getText().toString());
                         startActivity(myIntent);
                     }
                 }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     etPreferredHandle.setError(getString(R.string.empty_field));
                 } else {
                     Intent myIntent = new Intent(MainActivity.this, HomeFeedActivity.class);
-                    myIntent.putExtra("key", etPreferredHandle.getText());
+                    myIntent.putExtra(preferredHandleKey, etPreferredHandle.getText().toString());
                     startActivity(myIntent);
                 }
             }
