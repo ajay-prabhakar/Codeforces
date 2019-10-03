@@ -122,6 +122,7 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> {
 
         return jsonResponse;
     }
+
     private static String readFromStream(InputStream inputStream) throws IOException {
 
         StringBuilder output = new StringBuilder();

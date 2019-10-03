@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Codeforces</string>
+    <string name="empty_field">This field can\'t be empty.</string>
+    <string name="enter_preferred_handel">Please enter your preferred handle</string>
 </resources>
