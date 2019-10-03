@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,11 +20,16 @@ import static com.example.android.codeforces.Constants.preferredHandleKey;
 public class HomeFeedActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
     private String preferredHandle = "";
+    private ProgressBar pbProgressBar;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
+
+        pbProgressBar = findViewById(R.id.pbProgressBar);
+        recyclerView = findViewById(R.id.contestsAppeared);
 
         if (getIntent() != null) {
             preferredHandle = getIntent().getExtras().getString(preferredHandleKey);
@@ -38,6 +45,8 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
+        pbProgressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         ArrayList<Contest> contestList = new ArrayList<Contest>();
         try {
             JSONObject basejsonResponse = new JSONObject(data);
@@ -57,7 +66,6 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
         contestList = reverse(contestList);
         final FloatingActionButton fab = findViewById(R.id.fab);
 
-        final RecyclerView recyclerView = findViewById(R.id.contestsAppeared);
         ContestsAppearedAdapter adapter = new ContestsAppearedAdapter(this, contestList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
