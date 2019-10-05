@@ -2,7 +2,6 @@ package com.example.android.codeforces;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.widget.RatingBar;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -23,7 +23,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:src="@drawable/codeforces_logo" />
+                android:src="@drawable/codeforces_logo"
+                android:padding="10dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

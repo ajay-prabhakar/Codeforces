@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
