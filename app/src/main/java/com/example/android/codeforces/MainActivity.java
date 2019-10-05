@@ -18,14 +18,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
-    private static final String API_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Uri uri = Uri.parse(API_URL);
 
         getLoaderManager().initLoader(0, null, this);
     }
