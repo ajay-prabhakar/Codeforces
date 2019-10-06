@@ -13,10 +13,11 @@ import java.net.URL;
 
 public class RatingLoader extends AsyncTaskLoader<String> {
 
-    private static final String API_URL = "https://codeforces.com/api/user.rating?handle=sandeshghanta";
+    private String API_URL = "";
 
-    RatingLoader(Context context){
+    RatingLoader(Context context, String url){
         super(context);
+        API_URL = url;
     }
 
     @Override
