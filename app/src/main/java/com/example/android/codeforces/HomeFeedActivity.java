@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,10 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
     private String preferredHandle = "";
     private ProgressBar pbProgressBar;
     private RecyclerView recyclerView;
+    private ArrayList<Contest> contestList = new ArrayList<>();
+    private FloatingActionButton fab;
+    private ContestsAppearedAdapter adapter;
+    private TextView tvEmptyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,43 +34,10 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
 
         pbProgressBar = findViewById(R.id.pbProgressBar);
         recyclerView = findViewById(R.id.contestsAppeared);
+        fab = findViewById(R.id.fab);
+        tvEmptyList = findViewById(R.id.tvEmptyList);
 
-        if (getIntent() != null) {
-            preferredHandle = getIntent().getExtras().getString(preferredHandleKey);
-        }
-
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    @Override
-    public Loader<String> onCreateLoader(int id, Bundle args) {
-        return new RatingLoader(this, API_URL + preferredHandle);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<String> loader, String data) {
-        pbProgressBar.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        ArrayList<Contest> contestList = new ArrayList<Contest>();
-        try {
-            JSONObject basejsonResponse = new JSONObject(data);
-            JSONArray res = basejsonResponse.getJSONArray("result");
-            for(int i=0; i<res.length(); i++){
-                Contest contest = new Contest();
-                contest.setContestName(res.getJSONObject(i).getString("contestName"));
-                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
-                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
-                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
-                contest.setChange(contest.getNewRating()-contest.getOldRating());
-                contestList.add(contest);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        contestList = reverse(contestList);
-        final FloatingActionButton fab = findViewById(R.id.fab);
-
-        ContestsAppearedAdapter adapter = new ContestsAppearedAdapter(this, contestList);
+        adapter = new ContestsAppearedAdapter(this, contestList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -98,6 +70,47 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
                 recyclerView.scrollToPosition(0);
             }
         });
+
+        if (getIntent() != null) {
+            preferredHandle = getIntent().getExtras().getString(preferredHandleKey);
+        }
+
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public Loader<String> onCreateLoader(int id, Bundle args) {
+        return new RatingLoader(this, API_URL + preferredHandle);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<String> loader, String data) {
+        pbProgressBar.setVisibility(View.GONE);
+
+        try {
+            JSONObject baseJsonResponse = new JSONObject(data);
+            JSONArray res = baseJsonResponse.getJSONArray("result");
+            for(int i=0; i<res.length(); i++){
+                Contest contest = new Contest();
+                contest.setContestName(res.getJSONObject(i).getString("contestName"));
+                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
+                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
+                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
+                contest.setChange(contest.getNewRating()-contest.getOldRating());
+                contestList.add(contest);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        contestList = reverse(contestList);
+
+        if (contestList.size() == 0) {
+            tvEmptyList.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

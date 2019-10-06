@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HomeFeedActivity"/>
+        <activity
+            android:name=".HomeFeedActivity"
+            android:theme="@style/ActionBarTheme"/>
 
     </application>
 
