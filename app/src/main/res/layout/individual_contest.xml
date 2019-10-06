@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="@dimen/cardview_default_elevation"
     app:cardCornerRadius="5dp"
-    android:layout_margin="10dp">
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +20,8 @@
             android:layout_gravity="center">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:src="@drawable/codeforces_logo"
                 android:padding="10dp" />
@@ -50,8 +50,9 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_margin="2dp"
                         android:layout_height="wrap_content"
-                        android:paddingEnd="10dp"
                         android:text="Rank: " />
 
                     <TextView
@@ -68,9 +69,9 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:paddingEnd="10dp"
                         android:text="Old Rating: " />
 
                     <TextView
@@ -88,8 +89,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:layout_margin="2dp"
-                        android:paddingEnd="10dp"
                         android:text="Change: " />
 
                     <TextView
@@ -106,9 +107,9 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:paddingEnd="10dp"
                         android:text="New Rating: " />
 
                     <TextView
