@@ -1,7 +1,10 @@
 package com.example.android.codeforces;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +18,7 @@ public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppear
     private ArrayList<Contest> contestList;
     private Context context;
 
-    public ContestsAppearedAdapter(Context context, ArrayList<Contest> contestList){
+    public ContestsAppearedAdapter(Context context, ArrayList<Contest> contestList) {
         this.contestList = contestList;
         this.context = context;
     }
@@ -35,6 +38,15 @@ public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppear
         holder.oldRating.setText(String.valueOf(contest.getOldRating()));
         holder.change.setText(String.valueOf(contest.getChange()));
         holder.newRating.setText(String.valueOf(contest.getNewRating()));
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(String.format("%s/contest/%s", context.getString(R.string.codeforcesUrl), contest.getId())));
+                context.startActivity(browserIntent);
+            }
+        });
+
     }
 
     @Override
@@ -45,6 +57,7 @@ public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppear
     public class ContestsViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView contestName, rank, oldRating, change, newRating;
+        private CardView container;
 
         private ContestsViewHolder(View itemView) {
             super(itemView);
@@ -53,6 +66,7 @@ public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppear
             oldRating = itemView.findViewById(R.id.oldRating);
             change = itemView.findViewById(R.id.change);
             newRating = itemView.findViewById(R.id.newRating);
+            container = itemView.findViewById(R.id.container);
         }
     }
 }

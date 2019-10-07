@@ -5,6 +5,7 @@ public class Contest {
     private int oldRating;
     private int change;
     private int newRating;
+    private long id;
 
     public String getContestName() {
         return contestName;
@@ -44,5 +45,13 @@ public class Contest {
 
     public void setNewRating(int newRating) {
         this.newRating = newRating;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

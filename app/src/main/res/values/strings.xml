@@ -3,4 +3,5 @@
     <string name="empty_field">This field can\'t be empty.</string>
     <string name="enter_preferred_handel">Please enter your preferred handle</string>
     <string name="empty_contest_list">No contest found !</string>
+    <string name="codeforcesUrl">https://codeforces.com</string>
 </resources>

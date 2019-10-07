@@ -153,6 +153,7 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
             JSONArray res = baseJsonResponse.getJSONArray("result");
             for (int i = 0; i < res.length(); i++) {
                 Contest contest = new Contest();
+                contest.setId(res.getJSONObject(i).getInt("contestId"));
                 contest.setContestName(res.getJSONObject(i).getString("contestName"));
                 contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
                 contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
