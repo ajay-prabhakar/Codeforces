@@ -86,7 +86,7 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
 
         if (getIntent() != null) {
             preferredHandle = getIntent().getExtras().getString(preferredHandleKey);
-            getSupportActionBar().setSubtitle("Handle : "+preferredHandle);
+            getSupportActionBar().setSubtitle(String.format("Handle : %s",preferredHandle));
         }
 
         getLoaderManager().initLoader(0, null, this);
