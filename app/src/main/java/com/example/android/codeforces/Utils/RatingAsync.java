@@ -1,9 +1,14 @@
-package com.example.android.codeforces;
+package com.example.android.codeforces.Utils;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
+import com.example.android.codeforces.Listeners.ContestItemClickListener;
+import com.example.android.codeforces.Model.Contest;
+import com.example.android.codeforces.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> {
+public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> implements ContestItemClickListener {
 
     private Activity activity;
 
@@ -47,12 +52,16 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> {
             JSONObject basejsonResponse = new JSONObject(jsonResponse);
             JSONArray res = basejsonResponse.getJSONArray("result");
             for(int i=0; i<res.length(); i++){
-                Contest contest = new Contest();
-                contest.setContestName(res.getJSONObject(i).getString("contestName"));
-                contest.setRank(Integer.parseInt(res.getJSONObject(i).getString("rank")));
-                contest.setOldRating(Integer.parseInt(res.getJSONObject(i).getString("oldRating")));
-                contest.setNewRating(Integer.parseInt(res.getJSONObject(i).getString("newRating")));
-                contest.setChange(contest.getNewRating()-contest.getOldRating());
+                JSONObject currentContest = res.getJSONObject(i);
+                int change = currentContest.getInt("newRating") - currentContest.getInt("oldRating");
+                Contest contest = new Contest(
+                        currentContest.getInt("contestId"),
+                        currentContest.getString("contestName"),
+                        currentContest.getInt("rank"),
+                        currentContest.getInt("oldRating"),
+                        change,
+                        currentContest.getInt("newRating")
+                );
                 contestList.add(contest);
             }
         } catch (JSONException e) {
@@ -72,7 +81,7 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> {
     @Override
     protected void onPostExecute(ArrayList<Contest> contests) {
         RecyclerView recyclerView = activity.findViewById(R.id.contestsAppeared);
-        ContestsAppearedAdapter adapter = new ContestsAppearedAdapter(activity, contests);
+        ContestsAppearedAdapter adapter = new ContestsAppearedAdapter(activity, contests, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
     }
@@ -131,5 +140,10 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> {
             }
         }
         return output.toString();
+    }
+
+    @Override
+    public void onClick(int contestId) {
+
     }
 }

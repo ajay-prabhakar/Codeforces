@@ -1,4 +1,4 @@
-package com.example.android.codeforces;
+package com.example.android.codeforces.Activities;
 
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android.codeforces.R;
+
 import static com.example.android.codeforces.Constants.preferredHandleKey;
 
 public class MainActivity extends AppCompatActivity {
