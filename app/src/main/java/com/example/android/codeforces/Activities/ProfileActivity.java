@@ -1,4 +1,4 @@
-package com.example.android.codeforces;
+package com.example.android.codeforces.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.codeforces.R;
+import com.example.android.codeforces.Utils.StringUtils;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -44,8 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
             handle.setText(data.getString("handle"));
             rating.setText(data.getString("rating"));
             maxrating.setText(data.getString("maxRating"));
-            rank.setText(data.has("rank") ? Utils.toTitleCase(data.getString("rank")) : "N/A");
-            maxrank.setText(data.has("maxRank") ? Utils.toTitleCase(data.getString("maxRank")) : "N/A");
+            rank.setText(data.has("rank") ? StringUtils.toTitleCase(data.getString("rank")) : "N/A");
+            maxrank.setText(data.has("maxRank") ? StringUtils.toTitleCase(data.getString("maxRank")) : "N/A");
             friendof.setText(data.has("friendOfCount") ? data.getString("friendOfCount") : "N/A");
             country.setText(data.has("country") ? data.getString("country") : "N/A");
             org.setText(data.has("organization") ? data.getString("organization") : "N/A");

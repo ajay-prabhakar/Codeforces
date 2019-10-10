@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".HomeFeedActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.ProfileActivity"
+            android:parentActivityName=".Activities.HomeFeedActivity"/>
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +24,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeFeedActivity"
+            android:name=".Activities.HomeFeedActivity"
             android:launchMode="singleTop"
             android:label="Contest History"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Activities.MainActivity"
             android:theme="@style/ActionBarTheme" />
+
+        <activity android:name=".Activities.WebViewActivity"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

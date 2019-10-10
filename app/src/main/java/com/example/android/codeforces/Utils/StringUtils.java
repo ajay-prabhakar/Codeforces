@@ -1,6 +1,6 @@
-package com.example.android.codeforces;
+package com.example.android.codeforces.Utils;
 
-public class Utils {
+public class StringUtils {
     public static String toTitleCase(String input) {
         StringBuilder titleCase = new StringBuilder();
         boolean nextTitleCase = true;

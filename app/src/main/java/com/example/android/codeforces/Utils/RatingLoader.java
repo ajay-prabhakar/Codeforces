@@ -1,4 +1,4 @@
-package com.example.android.codeforces;
+package com.example.android.codeforces.Utils;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -15,7 +15,7 @@ public class RatingLoader extends AsyncTaskLoader<String> {
 
     private String API_URL = "";
 
-    RatingLoader(Context context, String url){
+    public RatingLoader(Context context, String url){
         super(context);
         API_URL = url;
     }
