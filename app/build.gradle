@@ -1,10 +1,13 @@
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.24.0"
+}
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.android.codeforces"
-        minSdkVersion 26
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -15,6 +18,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        indentWithTabs(2)
+        endWithNewline()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        target '**/*.java'
     }
 }
 

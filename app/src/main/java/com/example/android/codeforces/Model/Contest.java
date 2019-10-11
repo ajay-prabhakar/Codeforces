@@ -9,7 +9,8 @@ public class Contest {
     private int change;
     private int newRating;
 
-    public Contest(int contestId, String contestName, int rank, int oldRating, int change, int newRating) {
+    public Contest(
+            int contestId, String contestName, int rank, int oldRating, int change, int newRating) {
         this.contestId = contestId;
         this.contestName = contestName;
         this.rank = rank;

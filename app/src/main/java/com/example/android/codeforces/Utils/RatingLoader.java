@@ -2,7 +2,6 @@ package com.example.android.codeforces.Utils;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +14,7 @@ public class RatingLoader extends AsyncTaskLoader<String> {
 
     private String API_URL = "";
 
-    public RatingLoader(Context context, String url){
+    public RatingLoader(Context context, String url) {
         super(context);
         API_URL = url;
     }
@@ -32,7 +31,7 @@ public class RatingLoader extends AsyncTaskLoader<String> {
         String json = null;
         try {
             json = makeHttpRequest(url);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return json;
@@ -50,8 +49,7 @@ public class RatingLoader extends AsyncTaskLoader<String> {
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
-        if (url == null)
-            return jsonResponse;
+        if (url == null) return jsonResponse;
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -72,12 +70,12 @@ public class RatingLoader extends AsyncTaskLoader<String> {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
-            if (inputStream != null)
-                inputStream.close();
+            if (inputStream != null) inputStream.close();
         }
 
         return jsonResponse;
     }
+
     private static String readFromStream(InputStream inputStream) throws IOException {
 
         StringBuilder output = new StringBuilder();

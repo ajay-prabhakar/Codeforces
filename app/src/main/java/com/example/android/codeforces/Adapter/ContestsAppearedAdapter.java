@@ -8,20 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.android.codeforces.Listeners.ContestItemClickListener;
 import com.example.android.codeforces.Model.Contest;
 import com.example.android.codeforces.R;
-
 import java.util.ArrayList;
 
-public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppearedAdapter.ContestsViewHolder> {
+public class ContestsAppearedAdapter
+        extends RecyclerView.Adapter<ContestsAppearedAdapter.ContestsViewHolder> {
 
     private ArrayList<Contest> contestList;
     private Context context;
     private ContestItemClickListener clickListener;
 
-    public ContestsAppearedAdapter(Context context, ArrayList<Contest> contestList, ContestItemClickListener clickListener){
+    public ContestsAppearedAdapter(
+            Context context, ArrayList<Contest> contestList, ContestItemClickListener clickListener) {
         this.contestList = contestList;
         this.context = context;
         this.clickListener = clickListener;
@@ -29,13 +29,15 @@ public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppear
 
     @NonNull
     @Override
-    public ContestsAppearedAdapter.ContestsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContestsAppearedAdapter.ContestsViewHolder onCreateViewHolder(
+            @NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.individual_contest, parent, false);
         return new ContestsAppearedAdapter.ContestsViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContestsAppearedAdapter.ContestsViewHolder holder, int position) {
+    public void onBindViewHolder(
+            @NonNull ContestsAppearedAdapter.ContestsViewHolder holder, int position) {
         final Contest contest = contestList.get(position);
         holder.contestName.setText(String.valueOf(contest.getContestName()));
         holder.rank.setText(String.valueOf(contest.getRank()));
@@ -43,12 +45,13 @@ public class ContestsAppearedAdapter extends RecyclerView.Adapter<ContestsAppear
         holder.change.setText(String.valueOf(contest.getChange()));
         holder.newRating.setText(String.valueOf(contest.getNewRating()));
 
-        holder.cvContest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickListener.onClick(contest.getContestId());
-            }
-        });
+        holder.cvContest.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clickListener.onClick(contest.getContestId());
+                    }
+                });
     }
 
     @Override

@@ -4,16 +4,10 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
 import com.example.android.codeforces.Listeners.ContestItemClickListener;
 import com.example.android.codeforces.Model.Contest;
 import com.example.android.codeforces.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,8 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> implements ContestItemClickListener {
+public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>>
+        implements ContestItemClickListener {
 
     private Activity activity;
 
@@ -43,25 +41,24 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> imp
         }
 
         return extract(jsonResponse);
-
     }
 
-    private static ArrayList<Contest> extract(String jsonResponse){
+    private static ArrayList<Contest> extract(String jsonResponse) {
         ArrayList<Contest> contestList = new ArrayList<Contest>();
         try {
             JSONObject basejsonResponse = new JSONObject(jsonResponse);
             JSONArray res = basejsonResponse.getJSONArray("result");
-            for(int i=0; i<res.length(); i++){
+            for (int i = 0; i < res.length(); i++) {
                 JSONObject currentContest = res.getJSONObject(i);
                 int change = currentContest.getInt("newRating") - currentContest.getInt("oldRating");
-                Contest contest = new Contest(
-                        currentContest.getInt("contestId"),
-                        currentContest.getString("contestName"),
-                        currentContest.getInt("rank"),
-                        currentContest.getInt("oldRating"),
-                        change,
-                        currentContest.getInt("newRating")
-                );
+                Contest contest =
+                        new Contest(
+                                currentContest.getInt("contestId"),
+                                currentContest.getString("contestName"),
+                                currentContest.getInt("rank"),
+                                currentContest.getInt("oldRating"),
+                                change,
+                                currentContest.getInt("newRating"));
                 contestList.add(contest);
             }
         } catch (JSONException e) {
@@ -71,10 +68,9 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> imp
         return contestList;
     }
 
-    static ArrayList<Contest> reverse(ArrayList<Contest> contestList){
+    static ArrayList<Contest> reverse(ArrayList<Contest> contestList) {
         ArrayList<Contest> newList = new ArrayList<>();
-        for(int i=contestList.size()-1; i>=0; i--)
-            newList.add(contestList.get(i));
+        for (int i = contestList.size() - 1; i >= 0; i--) newList.add(contestList.get(i));
         return newList;
     }
 
@@ -98,8 +94,7 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> imp
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
-        if (url == null)
-            return jsonResponse;
+        if (url == null) return jsonResponse;
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -120,8 +115,7 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> imp
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
-            if (inputStream != null)
-                inputStream.close();
+            if (inputStream != null) inputStream.close();
         }
 
         return jsonResponse;
@@ -143,7 +137,5 @@ public class RatingAsync extends AsyncTask<String, Void, ArrayList<Contest>> imp
     }
 
     @Override
-    public void onClick(int contestId) {
-
-    }
+    public void onClick(int contestId) {}
 }

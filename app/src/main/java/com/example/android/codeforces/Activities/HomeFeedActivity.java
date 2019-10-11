@@ -1,5 +1,9 @@
 package com.example.android.codeforces.Activities;
 
+import static com.example.android.codeforces.Activities.WebViewActivity.OPEN_URL;
+import static com.example.android.codeforces.Constants.API_URL;
+import static com.example.android.codeforces.Constants.preferredHandleKey;
+
 import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,29 +18,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
 import com.example.android.codeforces.Listeners.ContestItemClickListener;
 import com.example.android.codeforces.Model.Contest;
 import com.example.android.codeforces.R;
-import android.widget.Toast;
-
 import com.example.android.codeforces.Utils.RatingLoader;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
+import cz.msebera.android.httpclient.Header;
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
-
-import static com.example.android.codeforces.Activities.WebViewActivity.OPEN_URL;
-import static com.example.android.codeforces.Constants.API_URL;
-import static com.example.android.codeforces.Constants.preferredHandleKey;
-
-public class HomeFeedActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>, ContestItemClickListener {
+public class HomeFeedActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<String>, ContestItemClickListener {
 
     private String preferredHandle = "";
     private ProgressBar pbProgressBar;
@@ -45,7 +42,6 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
     private FloatingActionButton fab;
     private ContestsAppearedAdapter adapter;
     private TextView tvEmptyList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,39 +57,43 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        recyclerView.addOnScrollListener(
+                new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                int positionView = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                        int positionView =
+                                ((LinearLayoutManager) recyclerView.getLayoutManager())
+                                        .findFirstVisibleItemPosition();
 
-                if (positionView > 0) {
-                    if (fab.getVisibility() != View.VISIBLE) {
-                        fab.show();
+                        if (positionView > 0) {
+                            if (fab.getVisibility() != View.VISIBLE) {
+                                fab.show();
+                            }
+                        } else {
+                            if (fab.getVisibility() == View.VISIBLE) {
+                                fab.hide();
+                            }
+                        }
                     }
-                } else {
-                    if (fab.getVisibility() == View.VISIBLE) {
-                        fab.hide();
+
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
                     }
-                }
-            }
+                });
 
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-        });
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerView.scrollToPosition(0);
-            }
-        });
+        fab.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recyclerView.scrollToPosition(0);
+                    }
+                });
 
         if (getIntent() != null) {
             preferredHandle = getIntent().getExtras().getString(preferredHandleKey);
-            getSupportActionBar().setSubtitle(String.format("Handle : %s",preferredHandle));
+            getSupportActionBar().setSubtitle(String.format("Handle : %s", preferredHandle));
         }
 
         getLoaderManager().initLoader(0, null, this);
@@ -122,26 +122,30 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
             progressDialog.setCancelable(false);
             progressDialog.show();
             AsyncHttpClient client = new AsyncHttpClient();
-            client.get("https://codeforces.com/api/user.info?handles=" + preferredHandle, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    startActivity(
-                            new Intent(HomeFeedActivity.this, ProfileActivity.class)
-                                    .putExtra("profile", new String(responseBody)));
-                }
+            client.get(
+                    "https://codeforces.com/api/user.info?handles=" + preferredHandle,
+                    new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            startActivity(
+                                    new Intent(HomeFeedActivity.this, ProfileActivity.class)
+                                            .putExtra("profile", new String(responseBody)));
+                        }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    Toast.makeText(HomeFeedActivity.this, "An unexpected error occurred.", Toast.LENGTH_SHORT).show();
-                }
+                        @Override
+                        public void onFailure(
+                                int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            Toast.makeText(
+                                            HomeFeedActivity.this, "An unexpected error occurred.", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
 
-                @Override
-                public void onFinish() {
-                    progressDialog.dismiss();
-                    super.onFinish();
-                }
-            });
-
+                        @Override
+                        public void onFinish() {
+                            progressDialog.dismiss();
+                            super.onFinish();
+                        }
+                    });
         }
         return super.onOptionsItemSelected(item);
     }
@@ -161,14 +165,14 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
             for (int i = 0; i < res.length(); i++) {
                 JSONObject currentContest = res.getJSONObject(i);
                 int change = currentContest.getInt("newRating") - currentContest.getInt("oldRating");
-                Contest contest = new Contest(
-                        currentContest.getInt("contestId"),
-                        currentContest.getString("contestName"),
-                        currentContest.getInt("rank"),
-                        currentContest.getInt("oldRating"),
-                        change,
-                        currentContest.getInt("newRating")
-                );
+                Contest contest =
+                        new Contest(
+                                currentContest.getInt("contestId"),
+                                currentContest.getString("contestName"),
+                                currentContest.getInt("rank"),
+                                currentContest.getInt("oldRating"),
+                                change,
+                                currentContest.getInt("newRating"));
                 contestList.add(contest);
             }
         } catch (JSONException e) {
@@ -186,14 +190,11 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
     }
 
     @Override
-    public void onLoaderReset(Loader<String> loader) {
-
-    }
+    public void onLoaderReset(Loader<String> loader) {}
 
     static ArrayList<Contest> reverse(ArrayList<Contest> contestList) {
         ArrayList<Contest> newList = new ArrayList<>();
-        for (int i = contestList.size() - 1; i >= 0; i--)
-            newList.add(contestList.get(i));
+        for (int i = contestList.size() - 1; i >= 0; i--) newList.add(contestList.get(i));
         return newList;
     }
 
@@ -204,4 +205,3 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
         startActivity(intent);
     }
 }
-
