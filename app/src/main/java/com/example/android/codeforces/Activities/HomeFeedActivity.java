@@ -32,8 +32,8 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.example.android.codeforces.Activities.WebViewActivity.OPEN_URL;
 import static com.example.android.codeforces.Constants.API_URL;
-import static com.example.android.codeforces.Constants.contestUrlKey;
 import static com.example.android.codeforces.Constants.preferredHandleKey;
 
 public class HomeFeedActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>, ContestItemClickListener {
@@ -45,6 +45,7 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
     private FloatingActionButton fab;
     private ContestsAppearedAdapter adapter;
     private TextView tvEmptyList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,7 +200,7 @@ public class HomeFeedActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onClick(int contestId) {
         Intent intent = new Intent(this, WebViewActivity.class);
-        intent.putExtra(contestUrlKey, "https://codeforces.com/contest/" + contestId);
+        intent.putExtra(OPEN_URL, "https://codeforces.com/contest/" + contestId);
         startActivity(intent);
     }
 }

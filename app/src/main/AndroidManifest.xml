@@ -31,6 +31,8 @@
             android:theme="@style/ActionBarTheme" />
 
         <activity android:name=".Activities.WebViewActivity"
+            android:label="About Contest"
+            android:parentActivityName=".Activities.HomeFeedActivity"
             android:theme="@style/AppTheme"/>
 
     </application>
