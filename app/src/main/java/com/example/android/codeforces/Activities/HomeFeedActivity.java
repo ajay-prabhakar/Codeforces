@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
+import com.example.android.codeforces.BottomSheet.SortBottomSheetView;
 import com.example.android.codeforces.Listeners.ContestItemClickListener;
 import com.example.android.codeforces.Model.Contest;
 import com.example.android.codeforces.R;
@@ -146,6 +147,11 @@ public class HomeFeedActivity extends AppCompatActivity
                             super.onFinish();
                         }
                     });
+        }
+
+        if (id == R.id.filter) {
+            SortBottomSheetView bottomSheetView = new SortBottomSheetView();
+            bottomSheetView.show(getSupportFragmentManager(), "SortBottomSheetView");
         }
         return super.onOptionsItemSelected(item);
     }
