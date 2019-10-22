@@ -18,7 +18,8 @@
             android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_height="150dp" />
+            android:layout_height="150dp"
+            android:contentDescription="Profile Image" />
         <TextView
             android:layout_marginTop="5dp"
             android:id="@+id/handle"

@@ -12,9 +12,9 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import com.example.android.codeforces.R;
 
-public class WebViewActivity extends AppCompatActivity {
+import static com.example.android.codeforces.Constants.contestUrlKey;
 
-    public static final String OPEN_URL = "url";
+public class WebViewActivity extends AppCompatActivity {
 
     private WebView webView;
     private ProgressBar progressBar;
@@ -24,7 +24,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
-        String url = getIntent().getStringExtra(OPEN_URL);
+        String url = getIntent().getStringExtra(contestUrlKey);
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);

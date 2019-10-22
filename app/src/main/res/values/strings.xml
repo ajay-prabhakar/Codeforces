@@ -3,4 +3,12 @@
     <string name="empty_field">This field can\'t be empty.</string>
     <string name="enter_preferred_handel">Please enter your preferred handle</string>
     <string name="empty_contest_list">No contest found !</string>
+    <string name="sort_by">Sort By</string>
+    <string name="change">Change</string>
+    <string name="negative_change">Negative Change</string>
+    <string name="positive_change">Positive Change</string>
+    <string name="rank">Rank: </string>
+    <string name="old_rating">Old Rating: </string>
+    <string name="rating_change">Change: </string>
+    <string name="new_rating">New Rating: </string>
 </resources>

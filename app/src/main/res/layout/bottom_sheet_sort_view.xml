@@ -7,46 +7,53 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sort By"
+        android:text="@string/sort_by"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_margin="16dp"
-        android:textColor="#000000"/>
+        android:textColor="@color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:weightSum="3"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:padding="0.5dp"
         android:background="@drawable/rounded_edittext"
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/change"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Change"
+            android:text="@string/change"
+            android:stateListAnimator="@null"
             android:background="@drawable/sort_button_background"
             android:textColor="@drawable/sort_button_text_color"
             android:textSize="12sp"/>
 
         <Button
+            android:id="@+id/negativeChange"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Negative Change"
+            android:stateListAnimator="@null"
+            android:text="@string/negative_change"
             android:background="@drawable/sort_button_background"
             android:textColor="@drawable/sort_button_text_color"
             android:textSize="12sp"/>
 
         <Button
+            android:id="@+id/positiveChange"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:stateListAnimator="@null"
             android:background="@drawable/sort_button_background"
-            android:text="Positive Change"
+            android:text="@string/positive_change"
             android:textColor="@drawable/sort_button_text_color"
             android:textSize="12sp"/>
 

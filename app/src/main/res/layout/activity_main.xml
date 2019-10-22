@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/ivCodeForces"
@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ivCodeForces"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="-16dp"
         android:text="@string/app_name"
         android:textStyle="bold"
         android:textSize="18sp" />
@@ -26,26 +27,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="10dp"
+        android:layout_margin="16dp"
         android:maxLines="1"
         android:inputType="text"
         android:padding="12dp"
         android:imeOptions="actionDone"
         android:background="@drawable/rounded_edittext"
-        android:shadowColor="#000000"
+        android:shadowColor="@color/black"
         android:hint="@string/enter_preferred_handel"/>
 
     <ImageView
         android:id="@+id/ivSubmit"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/etPreferredHandle"
         android:elevation="10dp"
         android:rotation="90"
         android:padding="8dp"
         android:background="@drawable/circular_button"
-        android:src="@drawable/ic_arrow_upward_24dp"/>
+        android:src="@drawable/ic_arrow_upward_24dp"
+        android:contentDescription="Submit Button" />
 
 </RelativeLayout>
