@@ -1,5 +1,7 @@
 package com.example.android.codeforces.Activities;
 
+import static com.example.android.codeforces.Constants.contestUrlKey;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +13,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import com.example.android.codeforces.R;
-
-import static com.example.android.codeforces.Constants.contestUrlKey;
 
 public class WebViewActivity extends AppCompatActivity {
 

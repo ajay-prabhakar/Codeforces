@@ -50,6 +50,7 @@ public class HomeFeedActivity extends AppCompatActivity
     private int currentSortState = CHANGE;
     private ArrayList<Contest> positiveChangeList = new ArrayList<>();
     private ArrayList<Contest> negativeChangeList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -235,27 +236,30 @@ public class HomeFeedActivity extends AppCompatActivity
     @Override
     public void buttonClicked(int button) {
         switch (button) {
-            case CHANGE: {
-                currentSortState = CHANGE;
-                adapter = new ContestsAppearedAdapter(this, contestList, this);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                break;
-            }
-            case NEGATIVE_CHANGE: {
-                currentSortState = NEGATIVE_CHANGE;
-                adapter = new ContestsAppearedAdapter(this, negativeChangeList, this);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                break;
-            }
-            case POSITIVE_CHANGE: {
-                currentSortState = POSITIVE_CHANGE;
-                adapter = new ContestsAppearedAdapter(this, positiveChangeList, this);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                break;
-            }
+            case CHANGE:
+                {
+                    currentSortState = CHANGE;
+                    adapter = new ContestsAppearedAdapter(this, contestList, this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    break;
+                }
+            case NEGATIVE_CHANGE:
+                {
+                    currentSortState = NEGATIVE_CHANGE;
+                    adapter = new ContestsAppearedAdapter(this, negativeChangeList, this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    break;
+                }
+            case POSITIVE_CHANGE:
+                {
+                    currentSortState = POSITIVE_CHANGE;
+                    adapter = new ContestsAppearedAdapter(this, positiveChangeList, this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    break;
+                }
         }
     }
 }
