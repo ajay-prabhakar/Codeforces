@@ -50,6 +50,7 @@ public class HomeFeedActivity extends AppCompatActivity
     private int currentSortState = CHANGE;
     private ArrayList<Contest> positiveChangeList = new ArrayList<>();
     private ArrayList<Contest> negativeChangeList = new ArrayList<>();
+    private MenuItem filterMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,7 @@ public class HomeFeedActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        filterMenuItem = menu.findItem(R.id.filter);
         return true;
     }
 
@@ -200,8 +202,10 @@ public class HomeFeedActivity extends AppCompatActivity
 
         if (contestList.size() == 0) {
             tvEmptyList.setVisibility(View.VISIBLE);
+            filterMenuItem.setVisible(false);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
+            filterMenuItem.setVisible(true);
             adapter.notifyDataSetChanged();
         }
         positiveNegativeChangeList(contestList);

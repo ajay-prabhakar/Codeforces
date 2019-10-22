@@ -8,6 +8,7 @@
         android:icon="@drawable/ic_filter_list_black_24dp"
         android:title="Filter List"
         app:showAsAction="ifRoom"
+        android:visible="false"
         tools:ignore="HardcodedText" />
 
     <item
