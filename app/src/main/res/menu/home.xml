@@ -2,11 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter_list_black_24dp"
+        android:title="Filter List"
+        app:showAsAction="ifRoom"
+        android:visible="false"
+        tools:ignore="HardcodedText" />
+
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_user"
         android:orderInCategory="100"
         android:title="Profile"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         tools:ignore="HardcodedText" />
+
 </menu>

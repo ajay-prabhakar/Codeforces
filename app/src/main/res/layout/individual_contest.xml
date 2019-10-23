@@ -54,12 +54,13 @@
                         android:textStyle="bold"
                         android:layout_margin="2dp"
                         android:layout_height="wrap_content"
-                        android:text="Rank: " />
+                        android:text="@string/rank" />
 
                     <TextView
                         android:id="@+id/rank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
                         tools:text="Rank" />
 
                 </LinearLayout>
@@ -73,7 +74,7 @@
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="Old Rating: " />
+                        android:text="@string/old_rating" />
 
                     <TextView
                         android:id="@+id/oldRating"
@@ -92,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_margin="2dp"
-                        android:text="Change: " />
+                        android:text="@string/rating_change" />
 
                     <TextView
                         android:id="@+id/change"
@@ -111,7 +112,7 @@
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="New Rating: " />
+                        android:text="@string/new_rating" />
 
                     <TextView
                         android:id="@+id/newRating"

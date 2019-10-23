@@ -1,5 +1,7 @@
 package com.example.android.codeforces.Activities;
 
+import static com.example.android.codeforces.Constants.contestUrlKey;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +16,6 @@ import com.example.android.codeforces.R;
 
 public class WebViewActivity extends AppCompatActivity {
 
-    public static final String OPEN_URL = "url";
-
     private WebView webView;
     private ProgressBar progressBar;
 
@@ -24,7 +24,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
-        String url = getIntent().getStringExtra(OPEN_URL);
+        String url = getIntent().getStringExtra(contestUrlKey);
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);

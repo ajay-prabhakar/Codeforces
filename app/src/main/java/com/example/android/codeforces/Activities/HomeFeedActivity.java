@@ -1,7 +1,10 @@
 package com.example.android.codeforces.Activities;
 
-import static com.example.android.codeforces.Activities.WebViewActivity.OPEN_URL;
 import static com.example.android.codeforces.Constants.API_URL;
+import static com.example.android.codeforces.Constants.CHANGE;
+import static com.example.android.codeforces.Constants.NEGATIVE_CHANGE;
+import static com.example.android.codeforces.Constants.POSITIVE_CHANGE;
+import static com.example.android.codeforces.Constants.contestUrlKey;
 import static com.example.android.codeforces.Constants.preferredHandleKey;
 
 import android.app.LoaderManager;
@@ -20,7 +23,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
+import com.example.android.codeforces.BottomSheet.SortBottomSheetView;
 import com.example.android.codeforces.Listeners.ContestItemClickListener;
+import com.example.android.codeforces.Listeners.SortClickListener;
 import com.example.android.codeforces.Model.Contest;
 import com.example.android.codeforces.R;
 import com.example.android.codeforces.Utils.RatingLoader;
@@ -33,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HomeFeedActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<String>, ContestItemClickListener {
+        implements LoaderManager.LoaderCallbacks<String>, ContestItemClickListener, SortClickListener {
 
     private String preferredHandle = "";
     private ProgressBar pbProgressBar;
@@ -42,6 +47,10 @@ public class HomeFeedActivity extends AppCompatActivity
     private FloatingActionButton fab;
     private ContestsAppearedAdapter adapter;
     private TextView tvEmptyList;
+    private int currentSortState = CHANGE;
+    private ArrayList<Contest> positiveChangeList = new ArrayList<>();
+    private ArrayList<Contest> negativeChangeList = new ArrayList<>();
+    private MenuItem filterMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +112,7 @@ public class HomeFeedActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        filterMenuItem = menu.findItem(R.id.filter);
         return true;
     }
 
@@ -147,6 +157,15 @@ public class HomeFeedActivity extends AppCompatActivity
                         }
                     });
         }
+
+        if (id == R.id.filter) {
+            SortBottomSheetView bottomSheetView = new SortBottomSheetView();
+            Bundle bundle = new Bundle();
+            bundle.putInt("sortValue", currentSortState);
+            bottomSheetView.setArguments(bundle);
+            bottomSheetView.setListener(this);
+            bottomSheetView.show(getSupportFragmentManager(), "SortBottomSheetView");
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -183,9 +202,22 @@ public class HomeFeedActivity extends AppCompatActivity
 
         if (contestList.size() == 0) {
             tvEmptyList.setVisibility(View.VISIBLE);
+            filterMenuItem.setVisible(false);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
+            filterMenuItem.setVisible(true);
             adapter.notifyDataSetChanged();
+        }
+        positiveNegativeChangeList(contestList);
+    }
+
+    private void positiveNegativeChangeList(ArrayList<Contest> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getChange() > 0) {
+                positiveChangeList.add(list.get(i));
+            } else {
+                negativeChangeList.add(list.get(i));
+            }
         }
     }
 
@@ -201,7 +233,37 @@ public class HomeFeedActivity extends AppCompatActivity
     @Override
     public void onClick(int contestId) {
         Intent intent = new Intent(this, WebViewActivity.class);
-        intent.putExtra(OPEN_URL, "https://codeforces.com/contest/" + contestId);
+        intent.putExtra(contestUrlKey, "https://codeforces.com/contest/" + contestId);
         startActivity(intent);
+    }
+
+    @Override
+    public void buttonClicked(int button) {
+        switch (button) {
+            case CHANGE:
+                {
+                    currentSortState = CHANGE;
+                    adapter = new ContestsAppearedAdapter(this, contestList, this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    break;
+                }
+            case NEGATIVE_CHANGE:
+                {
+                    currentSortState = NEGATIVE_CHANGE;
+                    adapter = new ContestsAppearedAdapter(this, negativeChangeList, this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    break;
+                }
+            case POSITIVE_CHANGE:
+                {
+                    currentSortState = POSITIVE_CHANGE;
+                    adapter = new ContestsAppearedAdapter(this, positiveChangeList, this);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    break;
+                }
+        }
     }
 }
