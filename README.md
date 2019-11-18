@@ -1,3 +1,11 @@
+<p align="center">
+  <img src='https://github.com/jaindiv26/Codeforces/blob/master/screenshots/codeforces_logo.png' width='400px'/>
+</p>
+
+<p align="center">
+<b>Codeforces</b>
+</p>
+
 ## About
 
 Codeforces is an unofficial Android version of Codeforces web. This app is made to integrate all the available Codeforces API into this app. This way the users can have a mobile version of their handle and can get key information on the go.
@@ -5,6 +13,24 @@ Codeforces is an unofficial Android version of Codeforces web. This app is made 
 ## Getting Started
 
 These instructions will get you a copy of the project up and be running on your local machine for development and testing purposes.
+
+### Screenshots
+
+<p align="center">
+  <img src='https://raw.githubusercontent.com/jaindiv26/Codeforces/master/screenshots/Screenshot_2019-11-18-17-47-19-033_com.example.android.codeforces.png' width='400px'/>
+</p>
+
+<p align="center">
+  <img src='https://raw.githubusercontent.com/jaindiv26/Codeforces/master/screenshots/Screenshot_2019-11-18-17-47-34-861_com.example.android.codeforces.png' width='400px'/>
+</p>
+
+<p align="center">
+  <img src='https://raw.githubusercontent.com/jaindiv26/Codeforces/master/screenshots/Screenshot_2019-11-18-17-47-45-682_com.example.android.codeforces.png' width='400px'/>
+</p>
+
+<p align="center">
+  <img src='https://raw.githubusercontent.com/jaindiv26/Codeforces/master/screenshots/Screenshot_2019-11-18-17-47-42-152_com.example.android.codeforces.png' width='400px'/>
+</p>
 
 ### Prerequisites
 
