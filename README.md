@@ -54,6 +54,30 @@ These instructions will get you a copy of the project up and be running on your 
      </tr>
 </table>
 
+## Workflow of app
+```
+.......
+codeforces
+ ┣ Activities
+ ┃ ┣ HomeFeedActivity.java
+ ┃ ┣ MainActivity.java
+ ┃ ┣ ProfileActivity.java
+ ┃ ┗ WebViewActivity.java
+ ┣ Adapter
+ ┃ ┗ ContestsAppearedAdapter.java
+ ┣ BottomSheet
+ ┃ ┗ SortBottomSheetView.java
+ ┣ Listeners
+ ┃ ┣ ContestItemClickListener.java
+ ┃ ┗ SortClickListener.java
+ ┣ Model
+ ┃ ┗ Contest.java
+ ┣ Utils
+ ┃ ┣ RatingAsync.java
+ ┃ ┣ RatingLoader.java
+ ┃ ┗ StringUtils.java
+ ┗ Constants.java
+ ```
 
 ### Prerequisites
 
