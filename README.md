@@ -26,10 +26,6 @@ When the app is opened, the user is required to enter his preferred handle (User
 * User can filter the contest based on the positive and negative.
 * User can view its profile.  
 
-## Getting Started
-
-These instructions will get you a copy of the project up and be running on your local machine for development and testing purposes.
-
 
 ## Libraries Used
 - [Architecture Components](https://developer.android.com/topic/libraries/architecture/)
@@ -78,6 +74,11 @@ codeforces
  ┃ ┗ StringUtils.java
  ┗ Constants.java
  ```
+ 
+ ## Getting Started
+
+These instructions will get you a copy of the project up and be running on your local machine for development and testing purposes.
+
 
 ### Prerequisites
 
