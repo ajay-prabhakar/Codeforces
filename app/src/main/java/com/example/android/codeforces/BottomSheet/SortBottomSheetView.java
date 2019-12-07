@@ -6,7 +6,7 @@ import static com.example.android.codeforces.Constants.POSITIVE_CHANGE;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.support.design.widget.BottomSheetDialogFragment;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import android.view.View;
 import android.widget.Button;
 import com.example.android.codeforces.Listeners.SortClickListener;
