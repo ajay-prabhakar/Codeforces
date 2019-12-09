@@ -4,7 +4,6 @@ import static com.example.android.codeforces.Constants.contestUrlKey;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -12,6 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.android.codeforces.R;
 
 public class WebViewActivity extends AppCompatActivity {
