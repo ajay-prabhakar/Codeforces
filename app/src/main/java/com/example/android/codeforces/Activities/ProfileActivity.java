@@ -1,10 +1,10 @@
 package com.example.android.codeforces.Activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.android.codeforces.R;
 import com.example.android.codeforces.Utils.StringUtils;
 import com.squareup.picasso.Picasso;

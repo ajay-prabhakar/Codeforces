@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             tools:text="Name"/>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_marginTop="20dp"
             app:cardBackgroundColor="#fff"
             android:foreground="?android:attr/selectableItemBackground"
@@ -244,6 +244,6 @@
                         />
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

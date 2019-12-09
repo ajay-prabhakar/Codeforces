@@ -2,8 +2,8 @@ package com.example.android.codeforces.Utils;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
 import com.example.android.codeforces.Listeners.ContestItemClickListener;
 import com.example.android.codeforces.Model.Contest;

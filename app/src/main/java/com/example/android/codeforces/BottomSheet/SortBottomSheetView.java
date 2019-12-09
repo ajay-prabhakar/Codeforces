@@ -6,11 +6,11 @@ import static com.example.android.codeforces.Constants.POSITIVE_CHANGE;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.View;
 import android.widget.Button;
 import com.example.android.codeforces.Listeners.SortClickListener;
 import com.example.android.codeforces.R;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class SortBottomSheetView extends BottomSheetDialogFragment {
 
