@@ -16,7 +16,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Activities.ProfileActivity"
             android:parentActivityName=".Activities.HomeFeedActivity"/>
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.MainActivity"
+            android:theme="@style/MainActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

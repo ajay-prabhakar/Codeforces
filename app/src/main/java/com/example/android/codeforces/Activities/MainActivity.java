@@ -11,6 +11,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.example.android.codeforces.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -18,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText etPreferredHandle;
     private ImageView ivSubmit;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
         etPreferredHandle = findViewById(R.id.etPreferredHandle);
         ivSubmit = findViewById(R.id.ivSubmit);
+        drawerLayout = findViewById(R.id.dashboardNavigationDrawer);
+        toolbar = findViewById(R.id.main_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_nav_btn);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         etPreferredHandle.setOnEditorActionListener(
                 new TextView.OnEditorActionListener() {
