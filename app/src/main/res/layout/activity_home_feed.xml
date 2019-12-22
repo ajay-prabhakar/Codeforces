@@ -1,51 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboardNavigationDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.HomeFeedActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/contestsAppeared"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/dashboardNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:elevation="5dp"
+        android:layout_marginStart="24dp"
+        android:fitsSystemWindows="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimaryDark">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nav_header"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/nav_app_logo"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/codeforces_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.6" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/nav_app_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toEndOf="@+id/nav_app_logo"
+                    app:layout_constraintTop_toTopOf="@+id/nav_app_logo">
+
+                    <TextView
+                        android:id="@+id/nav_app_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Codeforces"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nav_header"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:id="@+id/nav_blog_entities"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:paddingLeft="32dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center_vertical"
+                        android:text="Blog Entities"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/nav_recent_submissions"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:paddingLeft="32dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center_vertical"
+                        android:text="Recent Submissions"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/nav_sign_in_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:paddingLeft="32dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center_vertical"
+                        android:text="Sign in with another"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:visibility="gone"
-        android:layout_margin="10dp"/>
+        tools:context=".Activities.HomeFeedActivity">
 
-    <TextView
-        android:id="@+id/tvEmptyList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_contest_list"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:visibility="gone"/>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_arrow_upward_24dp"
-        app:backgroundTint="@color/white"
-        android:backgroundTint="@color/colorPrimary"
-        android:layout_alignParentEnd="true"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp" />
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="5dp"
+                android:id="@+id/main_toolbar"
+                app:titleTextColor="@color/white"
+                app:subtitleTextColor="@color/white"
+                style="@style/ActionBarTheme"
+                android:layout_height="?attr/actionBarSize"/>
 
-    <ProgressBar
-        android:id="@+id/pbProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/colorPrimary"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_centerInParent="true"
-        android:indeterminate="true"
-        android:visibility="visible"
-        />
+        </com.google.android.material.appbar.AppBarLayout>
 
-</RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contestsAppeared"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            android:layout_below="@id/appBarLayout"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/tvEmptyList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_contest_list"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_arrow_upward_24dp"
+            app:backgroundTint="@color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp" />
+
+        <ProgressBar
+            android:id="@+id/pbProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimary"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="visible"
+            />
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+

@@ -16,8 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Activities.ProfileActivity"
             android:parentActivityName=".Activities.HomeFeedActivity"/>
-        <activity android:name=".Activities.MainActivity"
-            android:theme="@style/MainActivityTheme">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +27,7 @@
             android:name=".Activities.HomeFeedActivity"
             android:launchMode="singleTop"
             android:label="Contest History"
-            android:parentActivityName=".Activities.MainActivity"
-            android:theme="@style/ActionBarTheme" />
+            android:theme="@style/MainActivityTheme" />
 
         <activity android:name=".Activities.WebViewActivity"
             android:label="About Contest"
