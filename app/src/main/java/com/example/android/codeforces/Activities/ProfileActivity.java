@@ -1,6 +1,9 @@
 package com.example.android.codeforces.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,18 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        Button btn = (Button)findViewById(R.id
+                .logOut);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity
+                        .this, MainActivity
+                        .class));
+                logOut();
+            }
+        });
 
         try {
             JSONObject jsonObject = new JSONObject(getIntent().getStringExtra("profile"));
@@ -55,5 +70,9 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
             e.printStackTrace();
         }
+    }
+    public void logOut(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }
