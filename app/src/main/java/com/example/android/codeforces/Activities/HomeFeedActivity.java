@@ -62,7 +62,6 @@ public class HomeFeedActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
 
-
         drawerLayout = findViewById(R.id.dashboardNavigationDrawer);
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_nav_btn);
@@ -179,7 +178,7 @@ public class HomeFeedActivity extends AppCompatActivity
             bottomSheetView.show(getSupportFragmentManager(), "SortBottomSheetView");
         }
 
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
@@ -287,7 +286,6 @@ public class HomeFeedActivity extends AppCompatActivity
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START);
-        else
-            super.onBackPressed();
+        else super.onBackPressed();
     }
 }
