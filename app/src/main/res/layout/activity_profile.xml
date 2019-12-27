@@ -245,5 +245,12 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/logOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/LogOut"
+            android:theme="@android:style/Theme.Holo" />
     </LinearLayout>
 </ScrollView>
