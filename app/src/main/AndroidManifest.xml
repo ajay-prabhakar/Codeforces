@@ -27,7 +27,8 @@
             android:name=".Activities.HomeFeedActivity"
             android:launchMode="singleTop"
             android:label="Contest History"
-            android:theme="@style/MainActivityTheme" />
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/ActionBarTheme" />
 
         <activity android:name=".Activities.WebViewActivity"
             android:label="About Contest"
