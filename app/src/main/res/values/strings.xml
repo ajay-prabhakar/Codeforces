@@ -11,4 +11,5 @@
     <string name="old_rating">Old Rating: </string>
     <string name="rating_change">Change: </string>
     <string name="new_rating">New Rating: </string>
+    <string name="log_out">Log Out</string>
 </resources>
