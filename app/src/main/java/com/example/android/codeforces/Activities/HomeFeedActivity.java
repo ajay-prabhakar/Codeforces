@@ -12,7 +12,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.codeforces.Adapter.ContestsAppearedAdapter;
@@ -55,18 +51,11 @@ public class HomeFeedActivity extends AppCompatActivity
     private ArrayList<Contest> positiveChangeList = new ArrayList<>();
     private ArrayList<Contest> negativeChangeList = new ArrayList<>();
     private MenuItem filterMenuItem;
-    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
-
-        drawerLayout = findViewById(R.id.dashboardNavigationDrawer);
-        Toolbar toolbar = findViewById(R.id.main_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_nav_btn);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Contest History");
 
         pbProgressBar = findViewById(R.id.pbProgressBar);
         recyclerView = findViewById(R.id.contestsAppeared);
@@ -134,7 +123,7 @@ public class HomeFeedActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         final ProgressDialog progressDialog;
-        Log.i("TESTING", "onOptionsItemSelected: " + id);
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.profile) {
             progressDialog = new ProgressDialog(HomeFeedActivity.this);
@@ -176,10 +165,6 @@ public class HomeFeedActivity extends AppCompatActivity
             bottomSheetView.setArguments(bundle);
             bottomSheetView.setListener(this);
             bottomSheetView.show(getSupportFragmentManager(), "SortBottomSheetView");
-        }
-
-        if (id == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -280,12 +265,5 @@ public class HomeFeedActivity extends AppCompatActivity
                     break;
                 }
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START);
-        else super.onBackPressed();
     }
 }
